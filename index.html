@@ -1,0 +1,243 @@
+<html>
+<body>
+    <style>
+        #lists
+        {
+            display: flex;
+            justify-content: center;
+        }
+        #first
+        {
+             border: 1px solid rgb(253, 95, 67);
+             width: 350px;
+            
+             margin:3rem;
+             display: flex;
+             flex-direction: column;
+             text-align: center;
+             padding:1rem
+        }
+        #second
+        {
+            display: flex;
+             border: 1px solid rgb(253, 95, 67);
+             width: 350px;
+            
+             margin:3rem;
+             flex-direction: column;
+             text-align: center;
+             padding:1rem
+           
+        }
+        #third
+        {
+            display: flex;
+             border: 1px solid  rgb(253, 95, 67);
+             width: 350px;
+            
+             margin:3rem;
+             flex-direction: column;
+             text-align: center;
+             padding:1rem
+        }
+       button
+       {
+           width:100%;
+           height: 3rem;
+           
+       }
+       .select
+       {
+        background:  rgb(253, 95, 67);
+
+       }
+       #disable
+        {
+           background-color: white;
+           color: lightgray;
+           border: 1px solid lightgray
+       }
+       #right1,#right2,#left1,#left2
+        {
+           background-color:  rgb(253, 95, 67);
+       }
+      
+       #one,#two,#three,#four
+       {
+           font-size: 25px;
+           height: 3rem;
+           text-align: center;
+           
+       }
+
+    </style>
+    <h1>
+        Acme, first, second, third
+    </h1>
+    <div id='lists'>
+        <div id='first'>
+            
+            <button id = 'right1'>></button>
+            <button id='disable'><</button>
+           
+             <h1>First</h1>
+            
+
+        </div>
+        <div id='second'>
+            <button id='right2'>></button>
+            <button id=left1><</button>
+            
+            <h1>Second</h1>
+            <div id ='one'>
+                moe
+            </div>
+            <div id ='two'>
+                larry
+            </div>
+        </div>
+        <div id='third'>
+            <button id='disable'>></button>
+            <button id=left2><</button>
+            <h1>Third</h1>
+            <div id ='three'>
+                curly
+            </div>
+            <div id ='four'>
+                lucy
+            </div>
+        </div>
+    </div>
+    <script>
+        const slots = ['first','second','third'];
+        const users = [
+            {id: 1, name: 'moe', slot: 'first'},
+            {id: 2, name: 'larry', slot: 'second'},
+            {id: 3, name: 'curly', slot: 'third'},
+            {id: 4, name: 'lucy', slot: 'third', selected: true}
+
+        ]
+        function highlight(){
+            
+        
+            var testHiglight = this.outerHTML
+            console.log(this.outerHTML)
+            console.log(typeof testHiglight)
+
+            if(testHiglight.includes('select'))
+            {
+                this.classList.remove("select");
+            }
+            else
+            {
+                this.classList.add("select");
+            }
+            
+           
+            
+        }
+        function rightbutton(){
+            
+            var items = document.getElementById('first')
+            var testString = items.outerHTML
+            //console.log(testString)
+            if(testString.includes('select'))
+            {
+                var selecteditems = Array.from(document.getElementById('first').getElementsByClassName('select'))
+                //console.log(typeof selecteditems)
+                console.log(selecteditems[0].outerHTML)
+                for(var i in selecteditems)
+                {
+                    var moverightfirst = document.getElementById('second')
+                    moverightfirst.appendChild(selecteditems[i])
+                    
+                    //items.removeChild(selecteditems[i])
+                }
+            }
+            
+           
+        }
+        function rightbutton2(){
+            
+            var items = document.getElementById('second')
+            var testString = items.outerHTML
+            console.log(testString)
+            if(testString.includes('select'))
+            {
+                var selecteditems = Array.from(document.getElementById('second').getElementsByClassName('select'))
+                console.log(selecteditems)
+                console.log(selecteditems[0].outerHTML)
+                for(var i in selecteditems)
+                {
+                    var moverightsecond = document.getElementById('third')
+                    moverightsecond.appendChild(selecteditems[i])                    
+                    //items.removeChild(selecteditems[i])
+                }
+            }
+            
+           
+        }
+        function leftbutton(){
+            
+            var items = document.getElementById('second')
+            var testString = items.outerHTML
+            console.log(testString)
+            if(testString.includes('select'))
+            {
+                var selecteditems = Array.from(document.getElementById('second').getElementsByClassName('select'))
+                console.log(selecteditems)
+                console.log(selecteditems[0].outerHTML)
+                for(var i in selecteditems)
+                {
+                    var moveleftfirst = document.getElementById('first')
+                    moveleftfirst.appendChild(selecteditems[i])                    
+                    //items.removeChild(selecteditems[i])
+                }
+            }
+            
+           
+        }
+        function leftbutton2(){
+            
+            var items = document.getElementById('third')
+            var testString = items.outerHTML
+            console.log(testString)
+            if(testString.includes('select'))
+            {
+                var selecteditems = Array.from(document.getElementById('third').getElementsByClassName('select'))
+                console.log(selecteditems)
+                console.log(selecteditems[0].outerHTML)
+                for(var i in selecteditems)
+                {
+                    var moveleftsecond = document.getElementById('second')
+                    moveleftsecond.appendChild(selecteditems[i])                    
+                    
+                    //items.removeChild(selecteditems[i])
+                }
+            }
+            
+           
+        }
+
+        var clicktext1= document.getElementById('one');
+        clicktext1.addEventListener("click", highlight);
+        var clicktext2= document.getElementById('two');
+        clicktext2.addEventListener("click", highlight);
+        var clicktext3= document.getElementById('three');
+        clicktext3.addEventListener("click", highlight);
+        var clicktext4= document.getElementById('four');
+        clicktext4.addEventListener("click", highlight);
+
+        var clickbutton1= document.getElementById('right1');
+        clickbutton1.addEventListener("click", rightbutton);
+
+        var clickbutton2= document.getElementById('right2');
+        clickbutton2.addEventListener("click", rightbutton2);
+        var clickbutton3= document.getElementById('left1');
+        clickbutton3.addEventListener("click", leftbutton);
+
+        var clickbutton4= document.getElementById('left2');
+        clickbutton4.addEventListener("click", leftbutton2);
+    </script>
+</body>
+</html>
